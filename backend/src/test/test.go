@@ -10,12 +10,14 @@ type user struct {
 func (u user) sing(song string) {
 	fmt.Println(song)
 }
-type s interface{
+
+type s interface {
 	sing(song string)
 }
+
 func main() {
-	me := user{"001","ybmj"}
+	me := user{"001", "ybmj"}
 	var i s
-	i := me
+	i = me
 	i.sing("love you")
 }

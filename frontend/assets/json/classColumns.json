@@ -1,0 +1,51 @@
+[
+  {
+    "title": "课号",
+    "key": "kh",
+    "align": "center",
+    "width": 100,
+    "sortable": true
+  },
+  {
+    "title": "课名",
+    "key": "km",
+    "align": "center",
+    "minWidth": 100,
+    "sortable": true
+  },
+  {
+    "title": "学分",
+    "key": "xf",
+    "align": "center",
+    "sortable": true,
+    "minWidth": 100
+  },
+  {
+    "title": "学时",
+    "key": "xs",
+    "align": "center",
+    "minWidth": 100,
+    "sortable": true
+  },
+  {
+    "title": "院系号",
+    "key": "yxh",
+    "align": "center",
+    "sortable": true,
+    "minWidth": 150
+  },
+  {
+    "title": "上课时间",
+    "key": "sksj",
+    "align": "center",
+    "sortable": true,
+    "minWidth": 150
+  },
+  {
+    "title": "操作",
+    "key": "Action",
+    "fixed": "right",
+    "width": 200,
+    "align": "center"
+  }
+]

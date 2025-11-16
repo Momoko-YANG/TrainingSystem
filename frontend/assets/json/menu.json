@@ -1,116 +1,116 @@
 {
   "student": [
     {
-      "groupName": "个人信息",
+      "groupName": "個人情報",
       "items": [
         {
           "name": "profile",
           "icon": "icon-solution",
-          "title": "个人信息"
+          "title": "個人情報"
         }
       ]
     },
     {
-      "groupName": "选课管理",
+      "groupName": "履修管理",
       "items": [
         {
           "name": "courseCalendar",
           "icon": "icon-calendar",
-          "title": "课表查询"
+          "title": "時間割照会"
         },
         {
           "name": "courseQuery",
           "icon": "icon-monitor",
-          "title": "课程查询"
+          "title": "コース検索"
         }
       ]
     },
     {
-      "groupName": "成绩管理",
+      "groupName": "成績管理",
       "items": [
         {
           "name": "scoreTable",
           "icon": "icon-project",
-          "title": "学期成绩"
+          "title": "学期成績"
         },
         {
           "name": "scoreSummary",
           "icon": "icon-filedone",
-          "title": "成绩大表"
+          "title": "成績表"
         },
         {
           "name": "scoreTrend",
           "icon": "icon-linechart",
-          "title": "成绩走势"
+          "title": "成績推移"
         },
         {
           "name": "scoreCollege",
           "icon": "icon-pointmap",
-          "title": "成绩排名"
+          "title": "成績順位"
         }
       ]
     }
   ],
   "teacher": [
     {
-      "groupName": "个人信息",
+      "groupName": "個人情報",
       "items": [
         {
           "name": "profile",
           "icon": "icon-solution",
-          "title": "个人信息"
+          "title": "個人情報"
         }
       ]
     },
     {
-      "groupName": "成绩管理",
+      "groupName": "成績管理",
       "items": [
         {
           "name": "scoreManagement",
           "icon": "icon-project",
-          "title": "成绩管理"
+          "title": "成績管理"
         },
         {
           "name": "scoreAnalysis",
           "icon": "icon-pointmap",
-          "title": "成绩统计"
+          "title": "成績統計"
         }
       ]
     },
     {
-      "groupName": "课程管理",
+      "groupName": "コース管理",
       "items": [
         {
           "name": "courseCalendar",
           "icon": "icon-calendar",
-          "title": "课表查询"
+          "title": "時間割照会"
         },
         {
           "name": "classTable",
           "icon": "icon-team",
-          "title": "班级信息"
+          "title": "クラス情報"
         }
       ]
     }
   ],
   "admin": [
     {
-      "groupName": "个人信息",
+      "groupName": "個人情報",
       "items": [
         {
           "name": "profile",
           "icon": "icon-solution",
-          "title": "个人信息"
+          "title": "個人情報"
         }
       ]
     },
     {
-      "groupName": "师生信息管理",
+      "groupName": "教員・学生管理",
       "items": [
         {
           "name": "teacherManagement",
           "icon": "icon-teacher",
-          "title": "教师管理"
+          "title": "教員管理"
         },
         {
           "name": "studentManagement",
@@ -120,17 +120,17 @@
       ]
     },
     {
-      "groupName": "课程信息管理",
+      "groupName": "コース情報管理",
       "items": [
         {
           "name": "courseManagement",
           "icon": "icon-filedone",
-          "title": "课程管理"
+          "title": "コース管理"
         }
       ]
     },
     {
-      "groupName": "系统管理",
+      "groupName": "システム管理",
       "items": [
         {
           "name": "termManagement",

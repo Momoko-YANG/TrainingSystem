@@ -4,7 +4,7 @@
       <Select
         v-model="selected"
         style="width:400px"
-        placeholder="请选择课程"
+        placeholder="Select Course"
         class="operation"
         @on-change="handleSwitchTerm"
       >
@@ -19,7 +19,7 @@
       <Table stripe border :columns="columns" :data="data1" size="large"></Table>
     </div>
     <Modal
-      title="录入成绩"
+      title="Submit Scores"
       v-model="showModal"
       @on-ok="editScore"
       @on-cancel="scoreValue=''"
@@ -28,7 +28,7 @@
       <Input
         v-model="scoreValue"
         autofocus
-        placeholder="键入成绩"
+        placeholder="Enter Score"
         type="number"
         :maxlength=3
         @on-enter="editScore"
@@ -38,7 +38,7 @@
 </template>
 
 <script>
-  //cid,term
+  // cid, term
   function requestData(requestBody, axios) {
     return axios({
       url: '/teacher/scoreManagement',
@@ -115,29 +115,29 @@
     data: () => ({
       columns: [
         {
-          'title': '学号',
+          'title': 'Student ID',
           'key': 'id',
           'align': 'center',
           'sortable': true
         },
         {
-          'title': '姓名',
+          'title': 'Name',
           'key': 'name',
           'align': 'center'
         },
         {
-          'title': '院系',
+          'title': 'Department',
           'key': 'dname',
           'align': 'center',
           'sortable': true
         },
         {
-          'title': '成绩',
+          'title': 'Score',
           'key': 'score',
           'align': 'center',
           'sortable': true,
           filters: [{
-            label: '未登分',
+            label: 'Not Graded',
             value: 1
           }],
           filterMethod(value, row) {
@@ -147,7 +147,7 @@
           }
         },
         {
-          'title': '操作',
+          'title': 'Actions',
           'key': 'action',
           'fixed': 'right',
           'width': 150,
@@ -170,7 +170,7 @@
                     that.thisRow = params.row
                   }
                 }
-              }, '录入成绩')
+              }, 'Submit Scores')
             ])
           }
         }
@@ -200,7 +200,7 @@
       editScore() {
         const score = this.scoreValue
         if (parseInt(score) < 0 || parseInt(score) > 100) {
-          this.$Message.warning('成绩必须是0~100的整数')
+          this.$Message.warning('Score must be an integer between 0 and 100')
           return
         }
         const arr = this.selected.split('|')

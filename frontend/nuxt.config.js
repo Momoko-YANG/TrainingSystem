@@ -12,7 +12,7 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    titleTemplate: chunk => chunk ? `${chunk} | 教学事务管理系统` : '教学事务管理系统',
+    titleTemplate: chunk => chunk ? `${chunk} | Training Management System` : 'Training Management System',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -59,6 +59,7 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/proxy',
     '@nuxtjs/pwa'
   ],
   /*
@@ -66,7 +67,11 @@ module.exports = {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    baseURL: '/api/'
+    proxy: true,
+    prefix: '/api/'
+  },
+  proxy: {
+    '/api/': 'http://localhost:9090'
   },
 
   /*
@@ -95,17 +100,17 @@ module.exports = {
     // }]]
     // },
     postcss: {
-      // 添加插件名称作为键，参数作为值
-      // 使用npm或yarn安装它们
+      // Add plugin names as keys, arguments as values
+      // Install them using npm or yarn
       plugins: {
-        // 通过传递 false 来禁用插件
+        // Disable a plugin by passing false
         'postcss-url': false,
         'postcss-nested': {},
         'postcss-responsive-type': {},
         'postcss-hexrgba': {}
       },
       preset: {
-        // 更改postcss-preset-env 设置
+        // Change postcss-preset-env settings
         autoprefixer: {
           grid: true
         }

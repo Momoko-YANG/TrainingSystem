@@ -62,7 +62,7 @@
         if (this.disabled) return
 
         if (new_window || this.target === '_blank') {
-          // 如果是 new_window，直接新开窗口就行，无需发送状态
+          // If new_window, just open a new window directly, no need to send state
           this.handleCheckClick(event, new_window)
           let parentMenu = findComponentUpward(this, 'Menu')
           if (parentMenu) parentMenu.handleEmitSelectEvent(this.name)
@@ -81,14 +81,14 @@
     },
     mounted() {
       this.$on('on-update-active-name', (name) => {
-        // console.log('麻溜了', this.name, name)
+        // console.log('done', this.name, name)
         if (this.name === name) {
           this.active = true
           this.dispatch('Submenu', 'on-update-active-name', name)
           // console.log('dispatch')
         } else {
           this.active = false
-          // console.log('完犊子')
+          // console.log('failed')
         }
       })
     }

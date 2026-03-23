@@ -2,7 +2,7 @@
   <div class="wrapper">
     <ButtonGroup class="operation">
       <Button type="primary" icon="md-add" size="large" @click="handleClickAddButton">
-        新增
+        Add
       </Button>
     </ButtonGroup>
     <Table
@@ -14,7 +14,7 @@
     ></Table>
     <Modal
       v-model="showModal"
-      :title="isAdding?'新增教师':'修改学生信息'"
+      :title="isAdding?'Add Teacher':'Edit Teacher'"
       @on-ok="handleAddTeacher"
       :loading="modalLoading"
       :mask-closable="false"
@@ -36,34 +36,34 @@
         style="padding:20px 30px 20px 15px"
         ref="form"
       >
-        <FormItem label="工号" prop="tid">
+        <FormItem label="Employee ID" prop="tid">
           <Input v-model="form.tid" :disabled="!isAdding"></Input>
         </FormItem>
-        <FormItem label="姓名" prop="tname">
+        <FormItem label="Name" prop="tname">
           <Input v-model="form.tname"></Input>
         </FormItem>
-        <FormItem label="学院" prop="dname">
-          <Select v-model="form.dname" placeholder="选择所属学院">
+        <FormItem label="Department" prop="dname">
+          <Select v-model="form.dname" placeholder="Select Department">
             <Option :value="dep" v-for="dep in deps" :key="dep">{{dep}}</Option>
           </Select>
         </FormItem>
-        <FormItem label="学历" prop="education">
-          <Select v-model="form.education" placeholder="选择学历">
-            <Option value="学士">学士</Option>
-            <Option value="硕士">硕士</Option>
-            <Option value="博士">博士</Option>
+        <FormItem label="Education" prop="education">
+          <Select v-model="form.education" placeholder="Select Education">
+            <Option value="Bachelor">Bachelor</Option>
+            <Option value="Master">Master</Option>
+            <Option value="PhD">PhD</Option>
           </Select>
         </FormItem>
-        <FormItem label="出生日期" prop="birthday">
-          <DatePicker type="date" placeholder="选择出生日期" v-model="form.birthday"></DatePicker>
+        <FormItem label="Birthday" prop="birthday">
+          <DatePicker type="date" placeholder="Select Date" v-model="form.birthday"></DatePicker>
         </FormItem>
-        <FormItem label="性别" prop="gender">
+        <FormItem label="Gender" prop="gender">
           <RadioGroup v-model="form.gender">
-            <Radio label="男">男</Radio>
-            <Radio label="女">女</Radio>
+            <Radio label="Male">Male</Radio>
+            <Radio label="Female">Female</Radio>
           </RadioGroup>
         </FormItem>
-        <FormItem label="薪资" prop="wage">
+        <FormItem label="Salary" prop="wage">
           <Input v-model="form.wage" number></Input>
         </FormItem>
       </Form>
@@ -111,39 +111,39 @@
       const that = this
       return {
         modalLoading: true,
-        deps: ['计算机学院'],
+        deps: ['Computer Science'],
         columns: [{
-          'title': '工号',
+          'title': 'Employee ID',
           'key': 'tid',
           'align': 'center',
           'sortable': true
         }, {
-          'title': '姓名',
+          'title': 'Name',
           'key': 'tname',
           'align': 'center'
         }, {
-          'title': '性别',
+          'title': 'Gender',
           'key': 'gender',
           'align': 'center'
         }, {
-          'title': '出生日期',
+          'title': 'Birthday',
           'key': 'birthday',
           'align': 'center'
         }, {
-          'title': '学历',
+          'title': 'Education',
           'key': 'education',
           'align': 'center'
         }, {
-          'title': '基本工资',
+          'title': 'Base Salary',
           'key': 'wage',
           'align': 'center'
         }, {
-          'title': '院系',
+          'title': 'Department',
           'key': 'dname',
           'align': 'center',
           'sortable': true
         }, {
-          'title': '操作',
+          'title': 'Actions',
           'key': 'action',
           'fixed': 'right',
           'width': 200,
@@ -176,7 +176,7 @@
                     console.log(that.form)
                   }
                 }
-              }, '修改'),
+              }, 'Edit'),
               h('Button', {
                 props: {
                   type: 'warning',
@@ -185,8 +185,8 @@
                 on: {
                   click: () => {
                     that.$Modal.confirm({
-                      title: '确认',
-                      content: `确定要删除教师 ${params.row.tname} 吗？`,
+                      title: 'Confirm',
+                      content: `Are you sure you want to delete teacher ${params.row.tname}?`,
                       loading: true,
                       onOk: () => {
                         that.$axios({
@@ -199,18 +199,18 @@
                         }).then((res) => {
                           that.$Modal.remove()
                           if (res.data.message === 'ok') {
-                            that.$Message.info('删除成功')
+                            that.$Message.info('Deleted successfully')
                             that.data1.splice(params.index, 1)
                           } else {
                             that.$Notice.warning({
-                              title: '提示',
+                              title: 'Notice',
                               desc: res.data.message
                             })
                           }
                         }).catch((err) => {
                           that.$Modal.remove()
                           that.$Notice.warning({
-                            title: '提示',
+                            title: 'Notice',
                             desc: err.toString()
                           })
                         })
@@ -220,7 +220,7 @@
                     })
                   }
                 }
-              }, '删除')
+              }, 'Delete')
             ])
           }
         }],
@@ -236,25 +236,25 @@
         },
         ruleValidate: {
           tid: [
-            { required: true, message: '工号不能为空', trigger: 'blur' }
+            { required: true, message: 'Employee ID is required', trigger: 'blur' }
           ],
           tname: [
-            { required: true, message: '姓名不能为空', trigger: 'blur' }
+            { required: true, message: 'Name is required', trigger: 'blur' }
           ],
           birthday: [
-            { required: true, type: 'date', message: '出生日期不能为空，且必须符合格式规范', trigger: 'change' }
+            { required: true, type: 'date', message: 'Birthday is required and must be in a valid format', trigger: 'change' }
           ],
           gender: [
-            { required: true, message: '性别必选', trigger: 'change' }
+            { required: true, message: 'Gender is required', trigger: 'change' }
           ],
           wage: [
-            { required: true, type: 'integer', min: 1, message: '薪资不能为空，且必须为正数', trigger: 'change' }
+            { required: true, type: 'integer', min: 1, message: 'Salary is required and must be a positive number', trigger: 'change' }
           ],
           education: [
-            { required: true, message: '学历不能为空', trigger: 'change' }
+            { required: true, message: 'Education is required', trigger: 'change' }
           ],
           dname: [
-            { required: true, message: '学院不能为空', trigger: 'change' }
+            { required: true, message: 'Department is required', trigger: 'change' }
           ]
         },
         showModal: false,
@@ -310,7 +310,7 @@
         }).then((res) => {
           console.log('handleAddTeacher', res.data)
           if (res.data.message === 'ok') {
-            this.$Message.info(`${this.isAdding ? '新增' : '修改'}成功`)
+            this.$Message.info(`${this.isAdding ? 'Added' : 'Updated'} successfully`)
             this.showModal = false
             this.form.birthday = birthday
             if (!this.isAdding) {

@@ -7,17 +7,17 @@
         class="header"
       >
         <Col>
-          <p>院系：{{profile.dname}}</p>
-          <p>姓名：{{profile.name}}</p>
+          <p>Department: {{profile.dname}}</p>
+          <p>Name: {{profile.name}}</p>
         </Col>
         <Col>
-          <p>学号：{{profile.id}}</p>
-          <p>性别：{{profile.gender}}</p>
+          <p>Student ID: {{profile.id}}</p>
+          <p>Gender: {{profile.gender}}</p>
         </Col>
       </Row>
     </div>
     <Table class="operation" stripe border :columns="columns" :data="data1" size="small"></Table>
-    <p class="tail">获得学分：{{sumxf}}，平均成绩：{{avecj}}</p>
+    <p class="tail">Credits Earned: {{sumxf}}, GPA: {{avecj}}</p>
   </div>
 </template>
 
@@ -59,27 +59,27 @@
       return {
         profile: {},
         columns: [{
-          'title': '课程号',
+          'title': 'Course ID',
           'key': 'kh',
           'align': 'center'
         }, {
-          'title': '课程名',
+          'title': 'Course Name',
           'key': 'km',
           'align': 'center'
         }, {
-          'title': '学分',
+          'title': 'Credits',
           'key': 'xf',
           'align': 'center'
         }, {
-          'title': '成绩',
+          'title': 'Score',
           'key': 'cj',
           'align': 'center'
         }, {
-          'title': '学期',
+          'title': 'Semester',
           'key': 'xq',
           'align': 'center'
         }, {
-          'title': '备注',
+          'title': 'Remarks',
           'key': 'bz',
           'align': 'center'
         }],

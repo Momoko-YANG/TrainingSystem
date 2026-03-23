@@ -2,7 +2,7 @@
   <div class="wrapper">
     <ButtonGroup class="operation">
       <Button type="primary" icon="md-add" size="large" @click="handleClickAddButton">
-        新增
+        Add
       </Button>
     </ButtonGroup>
     <Table
@@ -14,7 +14,7 @@
     ></Table>
     <Modal
       v-model="showModal"
-      :title="isAdding?'新增学生':'修改学生信息'"
+      :title="isAdding?'Add Student':'Edit Student'"
       @on-ok="handleAddStudent"
       :loading="modalLoading"
       :mask-closable="false"
@@ -37,30 +37,30 @@
         style="padding:20px 30px 20px 15px"
         ref="form"
       >
-        <FormItem label="学号" prop="id" :disabled="!isAdding">
+        <FormItem label="Student ID" prop="id" :disabled="!isAdding">
           <Input v-model="form.id"></Input>
         </FormItem>
-        <FormItem label="姓名" prop="name">
+        <FormItem label="Name" prop="name">
           <Input v-model="form.name"></Input>
         </FormItem>
-        <FormItem label="学院" prop="dname">
-          <Select v-model="form.dname" placeholder="选择所属学院">
+        <FormItem label="Department" prop="dname">
+          <Select v-model="form.dname" placeholder="Select Department">
             <Option :value="dep" v-for="dep in deps" :key="dep">{{dep}}</Option>
           </Select>
         </FormItem>
-        <FormItem label="出生日期" prop="birthday">
-          <DatePicker type="date" placeholder="选择出生日期" v-model="form.birthday"></DatePicker>
+        <FormItem label="Birthday" prop="birthday">
+          <DatePicker type="date" placeholder="Select Date" v-model="form.birthday"></DatePicker>
         </FormItem>
-        <FormItem label="性别" prop="gender">
+        <FormItem label="Gender" prop="gender">
           <RadioGroup v-model="form.gender">
-            <Radio label="男">男</Radio>
-            <Radio label="女">女</Radio>
+            <Radio label="Male">Male</Radio>
+            <Radio label="Female">Female</Radio>
           </RadioGroup>
         </FormItem>
-        <FormItem label="籍贯" prop="birthplace">
+        <FormItem label="Birthplace" prop="birthplace">
           <Input v-model="form.birthplace"></Input>
         </FormItem>
-        <FormItem label="手机号码" prop="phone">
+        <FormItem label="Phone" prop="phone">
           <Input v-model="form.phone" number></Input>
         </FormItem>
       </Form>
@@ -110,7 +110,7 @@
       const that = this
       return {
         modalLoading: true,
-        deps: ['计算机学院'],
+        deps: ['Computer Science'],
         ruleValidate: {
           // id,
           // name,
@@ -120,25 +120,25 @@
           // phone,
           // dname
           id: [
-            { required: true, message: '学号不能为空', trigger: 'blur' }
+            { required: true, message: 'Student ID is required', trigger: 'blur' }
           ],
           name: [
-            { required: true, message: '姓名不能为空', trigger: 'blur' }
+            { required: true, message: 'Name is required', trigger: 'blur' }
           ],
           birthday: [
-            { required: true, type: 'date', message: '出生日期不能为空，且必须符合格式规范', trigger: 'change' }
+            { required: true, type: 'date', message: 'Birthday is required and must be in a valid format', trigger: 'change' }
           ],
           gender: [
-            { required: true, message: '性别必选', trigger: 'change' }
+            { required: true, message: 'Gender is required', trigger: 'change' }
           ],
           phone: [
-            { required: true, type: 'integer', min: 1, message: '电话不能为空，且必须为数字', trigger: 'change' }
+            { required: true, type: 'integer', min: 1, message: 'Phone is required and must be a number', trigger: 'change' }
           ],
           birthplace: [
-            { required: true, message: '籍贯不能为空', trigger: 'change' }
+            { required: true, message: 'Birthplace is required', trigger: 'change' }
           ],
           dname: [
-            { required: true, message: '学院不能为空', trigger: 'change' }
+            { required: true, message: 'Department is required', trigger: 'change' }
           ]
         },
         form: {
@@ -154,36 +154,36 @@
         },
         showModal: false,
         columns: [{
-          'title': '学号',
+          'title': 'Student ID',
           'key': 'id',
           'align': 'center',
           'sortable': true
         }, {
-          'title': '姓名',
+          'title': 'Name',
           'key': 'name',
           'align': 'center'
         }, {
-          'title': '性别',
+          'title': 'Gender',
           'key': 'gender',
           'align': 'center'
         }, {
-          'title': '出生日期',
+          'title': 'Birthday',
           'key': 'birthday',
           'align': 'center'
         }, {
-          'title': '籍贯',
+          'title': 'Birthplace',
           'key': 'birthplace',
           'align': 'center'
         }, {
-          'title': '手机号码',
+          'title': 'Phone',
           'key': 'phone',
           'align': 'center'
         }, {
-          'title': '院系',
+          'title': 'Department',
           'key': 'dname',
           'align': 'center'
         }, {
-          'title': '操作',
+          'title': 'Actions',
           'key': 'action',
           'fixed': 'right',
           'width': 200,
@@ -216,7 +216,7 @@
                     console.log(that.form)
                   }
                 }
-              }, '修改'),
+              }, 'Edit'),
               h('Button', {
                 props: {
                   type: 'warning',
@@ -225,8 +225,8 @@
                 on: {
                   click: () => {
                     that.$Modal.confirm({
-                      title: '确认',
-                      content: `确定要删除学生 ${params.row.name} 吗？`,
+                      title: 'Confirm',
+                      content: `Are you sure you want to delete student ${params.row.name}?`,
                       loading: true,
                       onOk: () => {
                         that.$axios({
@@ -239,18 +239,18 @@
                         }).then((res) => {
                           that.$Modal.remove()
                           if (res.data.message === 'ok') {
-                            that.$Message.info('删除成功')
+                            that.$Message.info('Deleted successfully')
                             that.data1.splice(params.index, 1)
                           } else {
                             that.$Notice.warning({
-                              title: '提示',
+                              title: 'Notice',
                               desc: res.data.message
                             })
                           }
                         }).catch((err) => {
                           that.$Modal.remove()
                           that.$Notice.warning({
-                            title: '提示',
+                            title: 'Notice',
                             desc: err.toString()
                           })
                         })
@@ -260,7 +260,7 @@
                     })
                   }
                 }
-              }, '删除')
+              }, 'Delete')
             ])
           }
         }],
@@ -316,7 +316,7 @@
           }
         }).then((res) => {
           if (res.data.message === 'ok') {
-            this.$Message.info(`${this.isAdding ? '新增' : '修改'}成功`)
+            this.$Message.info(`${this.isAdding ? 'Added' : 'Updated'} successfully`)
             this.showModal = false
             this.form.birthday = birthday
             if (!this.isAdding) {

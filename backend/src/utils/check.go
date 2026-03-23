@@ -43,7 +43,7 @@ func CheckDname(dname string) (string, error) {
 	return did, err
 }
 
-// true: 有联系
+// true: has association
 func CheckTeaConnection(tid string) (bool, error) {
 	var cnt int
 	err := Db.QueryRow("select count(id) from CourseCalendar where tid = ?", tid).Scan(&cnt)

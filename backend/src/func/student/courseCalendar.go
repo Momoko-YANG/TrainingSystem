@@ -10,7 +10,7 @@ import (
 func CourseCalendar(w http.ResponseWriter, r *http.Request) {
 	ret := make(map[string]interface{})
 
-	// --- token 检查
+	// --- token check
 	claims, err := utils.PreCheck(r)
 	if err != nil {
 		utils.Response(&ret, &w, err.Error())
@@ -50,7 +50,7 @@ func CourseCalendar(w http.ResponseWriter, r *http.Request) {
 
 		c := make(map[string][]string)
 		tmp := make(map[string][]string)
-		// 先删后查
+		// delete first then query
 		if info.Op == "delete" {
 			term, err := utils.GetCurrentTerm()
 			if err != nil {

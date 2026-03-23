@@ -11,7 +11,7 @@ import (
 func ScoreManagement(w http.ResponseWriter, r *http.Request) {
 	ret := make(map[string]interface{})
 
-	// --- token 检查
+	// --- token check
 	claims, err := utils.PreCheck(r)
 	if err != nil {
 		utils.Response(&ret, &w, err.Error())

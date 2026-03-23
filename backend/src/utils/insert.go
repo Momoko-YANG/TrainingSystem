@@ -2,7 +2,6 @@ package utils
 
 import (
 	"errors"
-	"taas/models"
 )
 
 func InsertCourseSchedule(info map[string]string) error {
@@ -40,12 +39,11 @@ func InsertCourse(info map[string]string) error {
 }
 
 func InsertTerm(term string) error {
-	stmt, err := Db.Prepare("insert into Term(term,isCurrent,id) values(?, ?, ?)")
+	stmt, err := Db.Prepare("insert into Term(term,isCurrent) values(?, ?)")
 	if err != nil {
 		return err
 	}
-	_, err = stmt.Exec(term, "no", models.TermId)
-	models.TermId++
+	_, err = stmt.Exec(term, "no")
 	return err
 }
 func InsertCourseCalendar(info map[string]string) error {

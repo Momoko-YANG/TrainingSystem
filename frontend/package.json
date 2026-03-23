@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
+    "@nuxtjs/proxy": "^2.1.0",
     "@nuxtjs/pwa": "^2.6.0",
     "cookieparser": "^0.1.0",
     "cross-env": "^5.2.0",
@@ -21,12 +22,12 @@
     "js-base64": "^2.5.1",
     "js-cookie": "^2.2.0",
     "koa": "^2.6.2",
-    "sass": "^1.26.5",
     "normalize.css": "^8.0.1",
     "nuxt": "^2.6.3",
     "postcss-hexrgba": "^1.0.1",
     "postcss-nested": "^4.1.2",
     "postcss-responsive-type": "^1.0.0",
+    "sass": "^1.26.5",
     "sass-loader": "^7.1.0",
     "stickybits": "^3.6.5",
     "v-charts": "^1.19.0"

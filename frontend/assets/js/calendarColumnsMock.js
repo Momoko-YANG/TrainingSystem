@@ -9,37 +9,37 @@ export default {
           'align': 'center'
         },
         {
-          'title': '周一',
+          'title': 'Mon',
           'key': 1,
           'align': 'center'
         },
         {
-          'title': '周二',
+          'title': 'Tue',
           'key': 2,
           'align': 'center'
         },
         {
-          'title': '周三',
+          'title': 'Wed',
           'key': 3,
           'align': 'center'
         },
         {
-          'title': '周四',
+          'title': 'Thu',
           'key': 4,
           'align': 'center'
         },
         {
-          'title': '周五',
+          'title': 'Fri',
           'key': 5,
           'align': 'center'
         },
         {
-          'title': '周六',
+          'title': 'Sat',
           'key': 6,
           'align': 'center'
         },
         {
-          'title': '周日',
+          'title': 'Sun',
           'key': 7,
           'align': 'center'
         }

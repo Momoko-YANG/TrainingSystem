@@ -1,19 +1,19 @@
 <template>
   <div class="wrapper">
     <Form class="operation">
-      <FormItem label="学期">
+      <FormItem label="Semester">
         <Row type="flex" justify="space-between">
           <Select
             v-model="selected"
             style="width:200px"
-            placeholder="请选择学期"
+            placeholder="Select Semester"
             @on-change="handleSwitchTerm"
           >
             <Option v-for="term of terms" :value="term" :key="term">{{term}}</Option>
           </Select>
           <ButtonGroup>
             <Button type="primary" icon="md-add" size="large" @click="handleClickAddButton">
-              新增
+              Add
             </Button>
           </ButtonGroup>
         </Row>
@@ -35,7 +35,7 @@
       :mask-closable="false"
     >
       <div slot="header" style="overflow: unset;" class="ivu-drawer-header-inner">
-        开课安排
+        Course Schedule
         <Button
           size="small"
           type="dashed"
@@ -70,7 +70,7 @@
     </Drawer>
     <Modal
       v-model="showModal"
-      title="新增课程"
+      title="Add Course"
       @on-ok="handleAddCourse"
       :loading="modalLoading"
       :mask-closable="false"
@@ -89,17 +89,17 @@
         style="padding:20px 30px 20px 15px"
         ref="form"
       >
-        <FormItem label="课程号" prop="cid">
+        <FormItem label="Course ID" prop="cid">
           <Input v-model="form.cid"></Input>
         </FormItem>
-        <FormItem label="课程名" prop="cname">
+        <FormItem label="Course Name" prop="cname">
           <Input v-model="form.cname"></Input>
         </FormItem>
-        <FormItem label="学分数" prop="credit">
+        <FormItem label="Credits" prop="credit">
           <Input v-model="form.credit" number></Input>
         </FormItem>
-        <FormItem label="开课院系" prop="dname">
-          <Select v-model="form.dname" placeholder="选择开课院系">
+        <FormItem label="Department" prop="dname">
+          <Select v-model="form.dname" placeholder="Select Department">
             <Option :value="dep" v-for="dep in deps" :key="dep">{{dep}}</Option>
           </Select>
         </FormItem>
@@ -107,7 +107,7 @@
     </Modal>
     <Modal
       v-model="showModal2"
-      title="新增开课安排"
+      title="Add Course Schedule"
       @on-ok="handleAddSchedule"
       :loading="modalLoading2"
       :mask-closable="false"
@@ -126,12 +126,12 @@
         style="padding:20px 30px 20px 15px"
         ref="form2"
       >
-        <FormItem label="任课教师" prop="tid">
-          <Select v-model="form2.tid" placeholder="选择任课教师">
+        <FormItem label="Instructor" prop="tid">
+          <Select v-model="form2.tid" placeholder="Select Instructor">
             <Option :value="t" v-for="(t,index) of allTid" :key="t">{{t}} - {{allTname[index]}}</Option>
           </Select>
         </FormItem>
-        <FormItem label="上课时间" prop="classTime">
+        <FormItem label="Class Time" prop="classTime">
           <Input v-model="form2.classTime"></Input>
         </FormItem>
       </Form>
@@ -213,29 +213,29 @@
         allTname: [],
         allTid: [],
         columns: [{
-          'title': '课程号',
+          'title': 'Course ID',
           'key': 'cid',
           'align': 'center',
           'sortable': true
         }, {
-          'title': '课程名',
+          'title': 'Course Name',
           'key': 'cname',
           'align': 'center'
         }, {
-          'title': '学分',
+          'title': 'Credits',
           'key': 'credit',
           'align': 'center'
         }, {
-          'title': '开课院系',
+          'title': 'Department',
           'key': 'dname',
           'align': 'center'
         }, {
-          'title': '开课数',
+          'title': 'Sections',
           'key': 'count',
           'align': 'center',
           'sortable': true
         }, {
-          'title': '操作',
+          'title': 'Actions',
           'key': 'action',
           'fixed': 'right',
           'width': 250,
@@ -285,7 +285,7 @@
                       })()
                       if (that.selected === that.currentTerm) {
                         that.columns2 = [...that.rawColumns2, {
-                          'title': '操作',
+                          'title': 'Actions',
                           'key': 'action',
                           'fixed': 'right',
                           'width': 100,
@@ -305,8 +305,8 @@
                                 on: {
                                   click: () => {
                                     that.$Modal.confirm({
-                                      title: '确认',
-                                      content: `确定要删除开课安排 ${params.row.tname}-${params.row.cname} 吗？`,
+                                      title: 'Confirm',
+                                      content: `Are you sure to delete course schedule ${params.row.tname}-${params.row.cname}?`,
                                       loading: true,
                                       onOk: () => {
                                         that.$axios({
@@ -320,19 +320,19 @@
                                         }).then((res) => {
                                           that.$Modal.remove()
                                           if (res.data.message === 'ok') {
-                                            that.$Message.info('删除成功')
+                                            that.$Message.info('Deleted successfully')
                                             that.data2.splice(params.index, 1)
                                             that.thisRow.count--
                                           } else {
                                             that.$Notice.warning({
-                                              title: '提示',
+                                              title: 'Notice',
                                               desc: res.data.message
                                             })
                                           }
                                         }).catch((err) => {
                                           that.$Modal.remove()
                                           that.$Notice.warning({
-                                            title: '提示',
+                                            title: 'Notice',
                                             desc: err.toString()
                                           })
                                         })
@@ -342,7 +342,7 @@
                                     })
                                   }
                                 }
-                              }, '删除')
+                              }, 'Delete')
                             ])
                           }
                         }]
@@ -358,7 +358,7 @@
                     that.thisRow = params.row
                   }
                 }
-              }, '开课安排'),
+              }, 'Course Schedule'),
               h('Button', {
                 props: {
                   type: 'warning',
@@ -367,8 +367,8 @@
                 on: {
                   click: () => {
                     that.$Modal.confirm({
-                      title: '确认',
-                      content: `确定要删除课程 ${params.row.cname} 吗？该课程将会在所有学期中消失。`,
+                      title: 'Confirm',
+                      content: `Are you sure to delete course ${params.row.cname}? This course will be removed from all semesters.`,
                       loading: true,
                       onOk: () => {
                         that.$axios({
@@ -381,18 +381,18 @@
                         }).then((res) => {
                           that.$Modal.remove()
                           if (res.data.message === 'ok') {
-                            that.$Message.info('删除成功')
+                            that.$Message.info('Deleted successfully')
                             that.data1.splice(params.index, 1)
                           } else {
                             that.$Notice.warning({
-                              title: '提示',
+                              title: 'Notice',
                               desc: res.data.message
                             })
                           }
                         }).catch((err) => {
                           that.$Modal.remove()
                           that.$Notice.warning({
-                            title: '提示',
+                            title: 'Notice',
                             desc: err.toString()
                           })
                         })
@@ -402,49 +402,49 @@
                     })
                   }
                 }
-              }, '删除课程')
+              }, 'Delete Course')
             ])
           }
         }],
         columns2: [],
         rawColumns2: [
           {
-            'title': '课程号',
+            'title': 'Course ID',
             'key': 'cid',
             'align': 'center'
           },
           {
-            'title': '课程名',
+            'title': 'Course Name',
             'key': 'cname',
             'align': 'center'
           },
           {
-            'title': '教师号',
+            'title': 'Teacher ID',
             'key': 'tid',
             'align': 'center'
           },
           {
-            'title': '教师名',
+            'title': 'Teacher Name',
             'key': 'tname',
             'align': 'center'
           },
           {
-            'title': '学分',
+            'title': 'Credits',
             'key': 'credit',
             'align': 'center'
           },
           {
-            'title': '上课时间',
+            'title': 'Class Time',
             'key': 'classTime',
             'align': 'center'
           }
         ],
         data1: [{
           kh: '08305001',
-          km: '离散数学',
+          km: 'Discrete Mathematics',
           xf: '4',
           xs: '40',
-          dep: '计算机工程与科学学院',
+          dep: 'School of Computer Engineering and Science',
           kks: 3
         }],
         data2: [],
@@ -460,16 +460,16 @@
           // credit,
           // dname
           cid: [
-            { required: true, message: '课程号不能为空', trigger: 'blur' }
+            { required: true, message: 'Course ID is required', trigger: 'blur' }
           ],
           cname: [
-            { required: true, message: '课程名不能为空', trigger: 'blur' }
+            { required: true, message: 'Course Name is required', trigger: 'blur' }
           ],
           credit: [
-            { required: true, type: 'integer', min: 1, message: '学分不能为空，且必须为数字', trigger: 'change' }
+            { required: true, type: 'integer', min: 1, message: 'Credits is required and must be a number', trigger: 'change' }
           ],
           dname: [
-            { required: true, message: '开课院系不能为空', trigger: 'change' }
+            { required: true, message: 'Department is required', trigger: 'change' }
           ]
         },
         form: {
@@ -482,14 +482,14 @@
           // tid,
           // classTime
           tid: [
-            { required: true, message: '任课教师不能为空', trigger: 'blur' }
+            { required: true, message: 'Instructor is required', trigger: 'blur' }
           ],
           classTime: [
             {
               required: true,
               validator(rule, value, callback) {
                 if (!that.form2.tid) {
-                  return callback(new Error('请先选择任课教师'))
+                  return callback(new Error('Please select an instructor first'))
                 }
                 that.$axios({
                   url: '/getTeacherCourseInfo',
@@ -506,10 +506,10 @@
                   }
 
                   function forEachClassUnit({ classTime }, func) {
-                    //每门课
+                    // For each course
                     for (let i = 0; i < classTime.length; i++) {
                       let ct = classTime[i].split(' ')
-                      //每个不同的时间段
+                      // For each different time slot
                       if (!ct) {
                         ct = [classTime[i]]
                       }
@@ -517,14 +517,14 @@
                         const g = ct[j].match(/星期[一二三四五六七日天](\d+)-(\d+)/)
                         console.log(g)
                         if (!(g && g.length > 0 && g[1] >= 1 && g[1] <= 13 && g[2] >= 1 && g[2] <= 13 && parseInt(g[1]) <= g[2])) {
-                          throw new Error('上课时间格式不规范，示例：星期一11-13 星期五3-4')
+                          throw new Error('Invalid class time format, example: 星期一11-13 星期五3-4')
                         }
                         const column = tiptopMap[ct[j].substring(2)[0]]
                         const arr = ct[j].substring(3).split('-')
                         let rowBegin = parseInt(arr[0]),
                           rowEnd = parseInt(arr[1])
                         for (let k = rowBegin; k <= rowEnd; k++) {
-                          const stop = func(k, column, i, j)//课表中的行号（1开始），课表中的列号（2开始），课程下标，时间段下标
+                          const stop = func(k, column, i, j) // Row number in timetable (starting from 1), column number (starting from 2), course index, time slot index
                           if (stop) {
                             return
                           }
@@ -533,7 +533,7 @@
                     }
                   }
 
-                  //初始化课表，把0空出来
+                  // Initialize timetable, leave 0 empty
                   const matrix = new Array(14)
                   for (let i = 0; i < 14; i++) {
                     matrix[i] = new Array(8)
@@ -542,7 +542,7 @@
                     forEachClassUnit({ classTime: data.classTime }, (i, j) => {
                       matrix[i][j] = 1
                     })
-                    //查看是否重复
+                    // Check for conflicts
                     let invalid = false
                     let cIndex = -1
                     forEachClassUnit({ classTime: [value] }, (i, j, index) => {
@@ -554,7 +554,7 @@
                       return false
                     })
                     if (invalid) {
-                      return callback(new Error(`开课时间与该名教师的《${data.cname[cIndex]}》[${data.classTime[cIndex]}]冲突`))
+                      return callback(new Error(`Class time conflicts with this teacher's "${data.cname[cIndex]}" [${data.classTime[cIndex]}]`))
                     }
                   } catch (e) {
                     console.log(e)
@@ -603,7 +603,7 @@
           }
         }).then((res) => {
           if (res.data.message === 'ok') {
-            this.$Message.info('新增成功')
+            this.$Message.info('Added successfully')
             this.showModal2 = false
             this.data2.push(Object.assign({
               cid: this.thisRow.cid,
@@ -686,7 +686,7 @@
           }
         }).then((res) => {
           if (res.data.message === 'ok') {
-            this.$Message.info('新增成功')
+            this.$Message.info('Added successfully')
             this.showModal = false
             this.data1.push(Object.assign({}, this.form, { count: 0 }))
             this.$refs.form.resetFields()
@@ -709,7 +709,7 @@
         })
       },
       initCalendarColor({ raw = this.data2 } = {}) {
-        //计算，并赋予颜色
+        // Calculate and assign colors
         let colorArrayBak = Object.assign([], colorArray)
 
         function swap(arr, i, j) {
@@ -728,8 +728,8 @@
                        raw = this.data2,
                        hoverKh
                      } = {}) {
-        //raw是课程数组
-        //clear
+        // raw is the course array
+        // Clear
         let matrix = new Array(13)
         if (this.nodeMatrix.length) {
           for (let i = 0; i < this.nodeMatrix.length; i++) {
@@ -742,12 +742,12 @@
         for (let i = 0; i < 13; i++) {
           matrix[i] = new Array(7)
         }
-        //计算，并赋予颜色
+        // Calculate and assign colors
         this.initCalendarColor()
         raw.forEach((obj, index) => {
           let x = Object.assign({}, obj)
           let ct = x.classTime.split(' ')
-          //每个不同的时间段
+          // For each different time slot
           if (!ct) {
             ct = [x.classTime]
           }
@@ -759,12 +759,12 @@
             const arr = ct[j].substring(1).split('-')
             let begin = parseInt(arr[0]),
               end = parseInt(arr[1])
-            //给课程初始化一个颜色
+            // Initialize a color for the course
             let color
-            if (hoverKh === undefined || obj.kh === hoverKh) {//没有hover的元素，或hover的就是这个课程
+            if (hoverKh === undefined || obj.kh === hoverKh) { // No hovered element, or the hovered one is this course
               color = raw[index]._color
             } else {
-              color = 'rgba(0,0,0,.2)'//灰色
+              color = 'rgba(0,0,0,.2)' // Grey
             }
             matrix[begin - 1][day - 1] = {
               ...obj,
@@ -773,7 +773,7 @@
             }
           }
         })
-        //开始渲染
+        // Start rendering
         let tr = document.querySelectorAll('.calendar .ivu-table-tbody tr')
         for (let i = 0; i < tr.length; i++) {
           const tds = tr[i].querySelectorAll('td:not(:first-child)')

@@ -9,7 +9,7 @@
         v-model="isCollapsed"
       >
         <div class="layout-logo-left">
-          <span>教学</span><span>事务管理系统</span>
+          <span>Training</span><span> Management System</span>
         </div>
         <SideMenu
           :collapse="isCollapsed"
@@ -45,7 +45,7 @@
             ></div>
             <div class="userBox-content">
               <p class="userBox-content-name">{{profile.name}}</p>
-              <!-- <p class="userBox-content-type">个人</p> -->
+              <!-- <p class="userBox-content-type">Personal</p> -->
             </div>
             <Icon
               type="ios-arrow-down"
@@ -73,14 +73,14 @@
                 type="ios-person"
                 size="20"
               ></Icon>
-              个人信息
+              Profile
             </li>
             <li @click="logout">
               <Icon
                 type="md-exit"
                 size="20"
               ></Icon>
-              登出
+              Logout
             </li>
           </ul>
         </div>
@@ -112,7 +112,7 @@
     },
     head() {
       return {
-        title: identityMap[this.profile.identity] + '端'
+        title: identityMap[this.profile.identity] + ' Portal'
       }
     },
     filters: {
@@ -125,20 +125,20 @@
         isCollapsed: true,
         showUserPopTip: false,
         profile: {
-          birthplace: '河北',
-          dname: '计算机学院',
-          gender: '男',
-          grade: '大三',
+          birthplace: 'Hebei',
+          dname: 'School of Computer Science',
+          gender: 'Male',
+          grade: 'Junior',
           id: '16121674',
-          name: '苗伟华',
+          name: 'Weihua Miao',
           phone: '16601700694'
         },
         sidebarSelectedTitle: '',
         menu: []
       }
     },
-    asyncData({ params, app, route, redirect, req }) {//tip: 在客户端可能会多次触发，例如从404页面回退时
-      //特判
+    asyncData({ params, app, route, redirect, req }) {// Note: may be triggered multiple times on client side, e.g. when navigating back from a 404 page
+      // Special case
       if (route.path.substr(-params.users.length) === params.users) {
         return
       }
@@ -181,7 +181,7 @@
           path: '/login'
         })
       },
-      //获取用户信息
+      // Get user profile info
       initInfoProfile() {
         // this.$axios({
         //   url: '/user/info/16122131',

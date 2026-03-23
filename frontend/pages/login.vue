@@ -2,18 +2,18 @@
   <div class="login">
     <div class="filter">
       <div class="SysTitle">
-        教務管理システム
+        Training Management System
         <div class="login-box">
-          <Input v-model="username" style="margin-bottom: 10px" size="large" prefix='md-person' placeholder="ユーザー名"/>
+          <Input v-model="username" style="margin-bottom: 10px" size="large" prefix='md-person' placeholder="Username"/>
           <Input v-model="password" type="password" style="margin-bottom: 10px" prefix="md-lock" size="large"
-                 placeholder="パスワード"/>
+                 placeholder="Password"/>
           <ButtonGroup size="large" style="margin-top:10px">
             <div>
               <Button size="large" type="warning">
-                パスワードを忘れた？
+                Forgot Password?
               </Button>
               <Button size="large" type="primary" :loading="loading" @click="login">
-                ログイン
+                Login
               </Button>
             </div>
           </ButtonGroup>
@@ -38,7 +38,7 @@
     }),
     head() {
       return {
-        title: 'ログイン'
+        title: 'Login'
       }
     },
     methods: {
@@ -52,12 +52,12 @@
           }
         }).then((res) => {
           if (res.data.message === 'ok') {
-            this.$store.commit('setToken', res.data.token) // Vuexにトークンを保存（クライアントサイドレンダリング用）
-            this.$cookies.set('token', res.data.token, { expires: 1 }) // Cookieにトークンを保存（サーバーサイドレンダリング用）
+            this.$store.commit('setToken', res.data.token) // Save token to Vuex (for client-side rendering)
+            this.$cookies.set('token', res.data.token, { expires: 1 }) // Save token to Cookie (for server-side rendering)
             this.$router.push('/')
           } else {
             this.$Notice.warning({
-              title: 'ログイン失敗',
+              title: 'Login Failed',
               desc: res.data.message
             })
           }

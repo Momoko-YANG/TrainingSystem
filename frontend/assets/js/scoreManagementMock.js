@@ -1,11 +1,11 @@
 export default {
   data: () => ({
     terms: [{
-      name: '2018-2019冬',
+      name: '2018-2019 Winter',
       classes: [{
-        km: '数据结构与算法',
+        km: 'Data Structures and Algorithms',
         kh: '01015045',
-        sksj: '二7-9 四7-8 学院机房上机 四9-10 研讨'
+        sksj: 'Tue 7-9, Thu 7-8 Lab Practice, Thu 9-10 Seminar'
       }]
     }]
   })

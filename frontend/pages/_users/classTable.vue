@@ -4,7 +4,7 @@
       <Select
         v-model="selected"
         style="width:400px"
-        placeholder="请选择课程"
+        placeholder="Select Course"
         class="operation"
         @on-change="handleSwitchTerm"
       >
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-  //cid,term
+  // cid, term
   function requestData(requestBody, axios) {
     return axios({
       url: '/teacher/classTable',
@@ -104,33 +104,33 @@
     data: () => ({
       columns: [
         {
-          'title': '学号',
+          'title': 'Student ID',
           'key': 'id',
           'align': 'center',
           'sortable': true
         },
         {
-          'title': '姓名',
+          'title': 'Name',
           'key': 'name',
           'align': 'center'
         },
         {
-          'title': '性别',
+          'title': 'Gender',
           'key': 'gender',
           'align': 'center'
         },
         {
-          'title': '籍贯',
+          'title': 'Birthplace',
           'key': 'birthplace',
           'align': 'center'
         },
         {
-          'title': '手机号码',
+          'title': 'Phone',
           'key': 'phone',
           'align': 'center'
         },
         {
-          'title': '院系',
+          'title': 'Department',
           'key': 'dname',
           'align': 'center',
           'sortable': true

@@ -1,33 +1,33 @@
 <template>
   <Collapse v-model="whichCollapse" accordion>
     <Panel name="1">
-      我的信息
+      My Profile
       <p slot="content">
         <Tag color="blue">{{idLabel}}</Tag>
         {{profile.id||profile.tid||profile.aid}}
       </p>
       <p slot="content" v-if="profile.name||profile.tname">
-        <Tag color="orange">姓　名</Tag>
+        <Tag color="orange">Name</Tag>
         {{profile.name||profile.tname}}
       </p>
       <p slot="content" v-if="profile.gender">
-        <Tag color="green">性　别</Tag>
+        <Tag color="green">Gender</Tag>
         {{profile.gender}}
       </p>
       <p slot="content" v-if="profile.dname">
-        <Tag color="cyan">院　系</Tag>
+        <Tag color="cyan">Department</Tag>
         {{profile.dname}}
       </p>
       <p slot="content" v-if="profile.grade">
-        <Tag color="geekblue">年　级</Tag>
+        <Tag color="geekblue">Grade</Tag>
         {{profile.grade}}
       </p>
       <p slot="content" v-if="profile.birthplace">
-        <Tag color="magenta">籍　贯</Tag>
+        <Tag color="magenta">Birthplace</Tag>
         {{profile.birthplace}}
       </p>
       <p slot="content" v-if="profile.phone">
-        <Tag color="purple">手机号</Tag>
+        <Tag color="purple">Phone</Tag>
         {{profile.phone}}
       </p>
     </Panel>
@@ -41,9 +41,9 @@
       let idLabel = ''
       let ret = {}
       if (params.users === 'student') {
-        idLabel = '学　号'
+        idLabel = 'Student ID'
       } else {
-        idLabel = '工　号'
+        idLabel = 'Employee ID'
       }
       ret.idLabel = idLabel
       await app.$axios({
@@ -56,7 +56,7 @@
     },
     data: () => ({
       whichCollapse: '1',
-      idLabel: '学　号',
+      idLabel: 'Student ID',
       profile: {
         name: '',
         id: '',

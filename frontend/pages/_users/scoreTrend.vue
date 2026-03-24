@@ -41,7 +41,7 @@
     data() {
       this.chartSettings = {
         labelMap: {
-          'val': '平均分数'
+          'val': 'Average Score'
         }
       }
       return {

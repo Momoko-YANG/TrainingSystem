@@ -12,7 +12,7 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    titleTemplate: chunk => chunk ? `${chunk} | 教学事务管理系统` : '教学事务管理系统',
+    titleTemplate: chunk => chunk ? `${chunk} | Academic Affairs System` : 'Academic Affairs System',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -66,7 +66,8 @@ module.exports = {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    baseURL: '/api/'
+    baseURL: process.env.API_URL || 'http://127.0.0.1:9090/api/',
+    browserBaseURL: process.env.API_URL_BROWSER || 'http://127.0.0.1:9090/api/'
   },
 
   /*

@@ -1,11 +1,11 @@
 <template>
   <div class="wrapper">
     <Form class="operation">
-      <FormItem label="学期">
+      <FormItem label="Term">
         <Select
           v-model="selected"
           style="width:200px"
-          placeholder="请选择学期"
+          placeholder="Select a term"
           @on-change="handleSelectChange"
         >
           <Option v-for="term of terms" :value="term" :key="term">{{term}}</Option>
@@ -77,32 +77,32 @@
       return {
         selected: '',
         columns: [{
-          'title': '课程号',
+          'title': 'Course ID',
           'key': 'kh',
           'align': 'center'
         },
           {
-            'title': '课程名',
+            'title': 'Course Name',
             'key': 'km',
             'align': 'center'
           },
           {
-            'title': '教师号',
+            'title': 'Teacher ID',
             'key': 'gh',
             'align': 'center'
           },
           {
-            'title': '教师名',
+            'title': 'Teacher Name',
             'key': 'xm',
             'align': 'center'
           },
           {
-            'title': '学分',
+            'title': 'Credits',
             'key': 'xf',
             'align': 'center'
           },
           {
-            'title': '成绩',
+            'title': 'Score',
             'key': 'cj',
             'align': 'center'
           }],

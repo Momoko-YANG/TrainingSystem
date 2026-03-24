@@ -2,11 +2,11 @@ create database IF NOT EXISTS school;
 USE school;
 
 create table Department(
-    id varchar(10) not null,
-    name varchar(20) ,
+    did varchar(10) not null,
+    dname varchar(20) ,
     address varchar(50),
     phone varchar(20),
-    primary key(id)
+    primary key(did)
 );
 
 create table Student(
@@ -45,7 +45,7 @@ create table Teacher(
 
 create table Term(
     term varchar(20) not null,
-    isCurrent int not null,
+    isCurrent varchar(10) not null,
     primary key(term)
 );
 
@@ -90,7 +90,7 @@ create table User(
 
 create table Other (
     name  varchar(20) not null primary key,
-    msg varchar(20) not null
+    msg varchar(50) not null
 );
 
 create table Log(

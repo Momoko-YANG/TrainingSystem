@@ -2,18 +2,18 @@
   <div class="login">
     <div class="filter">
       <div class="SysTitle">
-        教務管理システム
+        Academic Affairs System
         <div class="login-box">
-          <Input v-model="username" style="margin-bottom: 10px" size="large" prefix='md-person' placeholder="ユーザー名"/>
+          <Input v-model="username" style="margin-bottom: 10px" size="large" prefix='md-person' placeholder="Username"/>
           <Input v-model="password" type="password" style="margin-bottom: 10px" prefix="md-lock" size="large"
-                 placeholder="パスワード"/>
+                 placeholder="Password"/>
           <ButtonGroup size="large" style="margin-top:10px">
             <div>
               <Button size="large" type="warning">
-                パスワードを忘れた？
+                Forgot Password?
               </Button>
               <Button size="large" type="primary" :loading="loading" @click="login">
-                ログイン
+                Sign In
               </Button>
             </div>
           </ButtonGroup>
@@ -38,7 +38,7 @@
     }),
     head() {
       return {
-        title: 'ログイン'
+        title: 'Login'
       }
     },
     methods: {
@@ -57,7 +57,7 @@
             this.$router.push('/')
           } else {
             this.$Notice.warning({
-              title: 'ログイン失敗',
+              title: 'Login Failed',
               desc: res.data.message
             })
           }

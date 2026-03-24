@@ -4,7 +4,7 @@
       <Select
         v-model="selected"
         style="width:400px"
-        placeholder="请选择课程"
+        placeholder="Select a course"
         class="operation"
         @on-change="handleSwitchTerm"
       >
@@ -104,33 +104,33 @@
     data: () => ({
       columns: [
         {
-          'title': '学号',
+          'title': 'Student ID',
           'key': 'id',
           'align': 'center',
           'sortable': true
         },
         {
-          'title': '姓名',
+          'title': 'Name',
           'key': 'name',
           'align': 'center'
         },
         {
-          'title': '性别',
+          'title': 'Gender',
           'key': 'gender',
           'align': 'center'
         },
         {
-          'title': '籍贯',
+          'title': 'Birthplace',
           'key': 'birthplace',
           'align': 'center'
         },
         {
-          'title': '手机号码',
+          'title': 'Phone',
           'key': 'phone',
           'align': 'center'
         },
         {
-          'title': '院系',
+          'title': 'Department',
           'key': 'dname',
           'align': 'center',
           'sortable': true
@@ -159,7 +159,7 @@
     methods: {
       async handleSwitchTerm(val) {
         const arr = val.split('|')
-        requestData({ cid: arr[0], term: arr[1]}, this.$axios).then((val) => {
+        requestData({ cid: arr[0], term: arr[1] }, this.$axios).then((val) => {
           this.data1 = val
         })
       }

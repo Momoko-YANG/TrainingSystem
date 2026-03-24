@@ -1,31 +1,22 @@
 <template>
   <div class="wrapper">
     <div class="operation" style="width:600px">
-      <span class="label">课程号：</span><Input enter-button style="width: 160px" v-model="cid" @on-enter="handleSearch"/>
-      <span class="label">课程名：</span><Input enter-button style="width: 160px" v-model="cname"
+      <span class="label">Course ID:</span><Input enter-button style="width: 160px" v-model="cid" @on-enter="handleSearch"/>
+      <span class="label">Course Name:</span><Input enter-button style="width: 160px" v-model="cname"
                                             @on-enter="handleSearch"/>
     </div>
     <div class="operation" style="width:600px">
-      <span class="label">教师名：</span><Input enter-button style="width: 160px" v-model="tname"
+      <span class="label">Teacher Name:</span><Input enter-button style="width: 160px" v-model="tname"
                                             @on-enter="handleSearch"/>
-      <span class="label">教师号：</span><Input enter-button style="width: 160px" v-model="tid" @on-enter="handleSearch"/>
+      <span class="label">Teacher ID:</span><Input enter-button style="width: 160px" v-model="tid" @on-enter="handleSearch"/>
     </div>
-    <Table class="operation" stripe border :columns="columns" :data="data1" size="large" placeholder="请按条件搜索"></Table>
+    <Table class="operation" stripe border :columns="columns" :data="data1" size="large" placeholder="Search by any field"></Table>
   </div>
 </template>
 
 <script>
-  const tiptopMap = {
-    '一': 1,
-    '二': 2,
-    '三': 3,
-    '四': 4,
-    '五': 5,
-    '六': 6,
-    '七': 7,
-    '天': 7,
-    '日': 7
-  }
+  import { iterateScheduleUnits } from '~/assets/js/schedule'
+
   var that = null
   export default {
     name: 'courseQuery',
@@ -35,31 +26,31 @@
     data() {
       return {
         columns: [{
-          'title': '课程号',
+          'title': 'Course ID',
           'key': 'kh',
           'align': 'center'
         }, {
-          'title': '课程名',
+          'title': 'Course Name',
           'key': 'km',
           'align': 'center'
         }, {
-          'title': '教师号',
+          'title': 'Teacher ID',
           'key': 'gh',
           'align': 'center'
         }, {
-          'title': '教师名',
+          'title': 'Teacher Name',
           'key': 'xm',
           'align': 'center'
         }, {
-          'title': '学分',
+          'title': 'Credits',
           'key': 'xf',
           'align': 'center'
         }, {
-          'title': '上课时间',
+          'title': 'Class Time',
           'key': 'sksj',
           'align': 'center'
         }, {
-          'title': '操作',
+          'title': 'Actions',
           'key': 'action',
           'fixed': 'right',
           'width': 100,
@@ -103,37 +94,9 @@
                           for (let i = 0; i < data.cid.length; i++) {
                             if (params.row.kh === data.cid[i]) {
                               return that.$Notice.warning({
-                                title: '提示',
-                                desc: `您本学期已选[${data.cid[i]}]《${data.cname[i]}》(${data.tname[i]})，不能重复选择相同课程号的课程`
+                                title: 'Warning',
+                                desc: `You have already selected [${data.cid[i]}] ${data.cname[i]} (${data.tname[i]}) for this term. Duplicate course IDs are not allowed.`
                               })
-                            }
-                          }
-
-                          function forEachClassUnit({ classTime }, func) {
-                            //每门课
-                            for (let i = 0; i < classTime.length; i++) {
-                              let ct = classTime[i].split(' ')
-                              //每个不同的时间段
-                              if (!ct) {
-                                ct = [classTime[i]]
-                              }
-                              for (let j = 0; j < ct.length; j++) {
-                                const g = ct[j].match(/星期[一二三四五六七日天](\d+)-(\d+)/)
-                                console.log(g)
-                                if (!(g && g.length > 0 && g[1] >= 1 && g[1] <= 13 && g[2] >= 1 && g[2] <= 13 && parseInt(g[1]) <= g[2])) {
-                                  throw new Error('上课时间格式不规范，示例：星期一11-13 星期五3-4')
-                                }
-                                const column = tiptopMap[ct[j].substring(2)[0]]
-                                const arr = ct[j].substring(3).split('-')
-                                let rowBegin = parseInt(arr[0]),
-                                  rowEnd = parseInt(arr[1])
-                                for (let k = rowBegin; k <= rowEnd; k++) {
-                                  const stop = func(k, column, i, j)//课表中的行号（1开始），课表中的列号（2开始），课程下标，时间段下标
-                                  if (stop) {
-                                    return
-                                  }
-                                }
-                              }
                             }
                           }
 
@@ -143,13 +106,13 @@
                             matrix[i] = new Array(8)
                           }
                           try {
-                            forEachClassUnit({ classTime: data.classTime }, (i, j) => {
+                            iterateScheduleUnits(data.classTime, (i, j) => {
                               matrix[i][j] = 1
                             })
                             //查看上课时间是否重复
                             let invalid = false
                             let cIndex = -1
-                            forEachClassUnit({ classTime: [params.row.sksj] }, (i, j, index) => {
+                            iterateScheduleUnits(params.row.sksj, (i, j, index) => {
                               if (matrix[i][j]) {
                                 invalid = true
                                 cIndex = index
@@ -159,14 +122,14 @@
                             })
                             if (invalid) {
                               return that.$Notice.warning({
-                                title: '提示',
-                                desc: `上课时间与所选的《${data.cname[cIndex]}》[${data.classTime[cIndex]}]冲突`
+                                title: 'Warning',
+                                desc: `This class time conflicts with ${data.cname[cIndex]} [${data.classTime[cIndex]}].`
                               })
                             }
                             //发送提示
                             that.$Modal.confirm({
-                              title: '确认',
-                              content: `确定要选课《${params.row.km}》吗？`,
+                              title: 'Confirm',
+                              content: `Do you want to enroll in ${params.row.km}?`,
                               loading: true,
                               onOk: () => {
                                 that.$axios({
@@ -181,7 +144,7 @@
                                   }
                                 }).then((res) => {
                                   if (res.data.message === 'ok') {
-                                    that.$Message.info('选课成功')
+                                    that.$Message.info('Enrollment successful')
                                   } else {
                                     that.$Message.warning(res.data.message)
                                   }
@@ -194,34 +157,34 @@
                           } catch (e) {
                             console.log(e)
                             that.$Notice.warning({
-                              title: '提示',
+                              title: 'Warning',
                               desc: e.toString()
                             })
                           }
                         }).catch((err) => {
                           console.log(err)
                           that.$Notice.warning({
-                            title: '提示',
+                            title: 'Warning',
                             desc: err.toString()
                           })
                         })
                       } else {
                         that.$Notice.warning({
-                          title: '提示',
-                          desc: '当前时间选课尚未开放'
+                          title: 'Warning',
+                          desc: 'Course enrollment is currently closed.'
                         })
                       }
                     }).catch((err) => {
                       console.log(err)
                       that.$Notice.warning({
-                        title: '提示',
+                        title: 'Warning',
                         desc: err.toString()
                       })
                     })
 
                   }
                 }
-              }, '选课')
+              }, 'Enroll')
             ])
           }
         }],

@@ -38,37 +38,37 @@
       return {
         selected: '',
         columns: [{
-          'title': '学号',
+          'title': 'Student ID',
           'key': 'xh',
           'align': 'center'
         },
           {
-            'title': '姓名',
+            'title': 'Name',
             'key': 'xm',
             'align': 'center'
           },
           {
-            'title': '平均成绩',
+            'title': 'Average Score',
             'key': 'pjcj',
             'align': 'center'
           },
           {
-            'title': '院系',
+            'title': 'Department',
             'key': 'yx',
             'align': 'center'
           },
           {
-            'title': '年级总人数',
+            'title': 'Class Size',
             'key': 'zs',
             'align': 'center'
           },
           {
-            'title': '排名',
+            'title': 'Rank',
             'key': 'pm',
             'align': 'center'
           },
           {
-            'title': '百分比',
+            'title': 'Percentile',
             'key': 'bfb',
             'align': 'center'
           }],

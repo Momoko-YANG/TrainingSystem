@@ -9,7 +9,7 @@
         v-model="isCollapsed"
       >
         <div class="layout-logo-left">
-          <span>教学</span><span>事务管理系统</span>
+          <span>Academic</span><span>Affairs System</span>
         </div>
         <SideMenu
           :collapse="isCollapsed"
@@ -73,14 +73,14 @@
                 type="ios-person"
                 size="20"
               ></Icon>
-              个人信息
+              Profile
             </li>
             <li @click="logout">
               <Icon
                 type="md-exit"
                 size="20"
               ></Icon>
-              登出
+              Sign Out
             </li>
           </ul>
         </div>
@@ -112,7 +112,7 @@
     },
     head() {
       return {
-        title: identityMap[this.profile.identity] + '端'
+        title: `${identityMap[this.profile.identity]} Portal`
       }
     },
     filters: {
@@ -125,12 +125,12 @@
         isCollapsed: true,
         showUserPopTip: false,
         profile: {
-          birthplace: '河北',
-          dname: '计算机学院',
-          gender: '男',
-          grade: '大三',
+          birthplace: 'Tokyo',
+          dname: 'Computer Science',
+          gender: 'Male',
+          grade: 'Junior',
           id: '16121674',
-          name: '苗伟华',
+          name: 'Alex Parker',
           phone: '16601700694'
         },
         sidebarSelectedTitle: '',

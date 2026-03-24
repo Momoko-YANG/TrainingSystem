@@ -5,7 +5,7 @@ export default function({ $axios, app, store, nuxtState }) {
     if (store.state.token) {
       config.headers.Authorization = store.state.token
     } else {
-      console.warn('无法在headers添加Authorization', config.url)
+      console.warn('Unable to add Authorization header', config.url)
     }
     store.dispatch('xhrIncWithSpin', { app })
   })

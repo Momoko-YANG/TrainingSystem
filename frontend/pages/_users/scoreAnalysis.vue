@@ -4,7 +4,7 @@
       <Select
         v-model="selected"
         style="width:400px"
-        placeholder="请选择课程"
+        placeholder="Select a course"
         class="operation"
         @on-change="handleSwitchTerm"
       >
@@ -71,7 +71,7 @@
         ret.push({ 'date': '90~100', 'val': dis[4] })
       }
       if (cntNoGrade) {
-        ret.push({ 'date': '未登分', 'val': cntNoGrade })
+        ret.push({ 'date': 'Ungraded', 'val': cntNoGrade })
       }
       return ret
     })
@@ -131,7 +131,7 @@
     data() {
       this.chartSettings = {
         labelMap: {
-          'val': '人数'
+          'val': 'Students'
         }
       }
       return {

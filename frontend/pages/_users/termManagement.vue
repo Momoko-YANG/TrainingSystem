@@ -2,15 +2,15 @@
   <div class="wrapper">
     <ButtonGroup class="operation">
       <Button type="primary" icon="md-add" size="large" @click="handleClickAddButton">
-        新增学期
+        Add Term
       </Button>
       <Button type="warning" icon="md-close-circle" size="large" @click="handleClickOpenButton"
               v-if="openCourse">
-        关闭选课
+        Close Enrollment
       </Button>
       <Button type="info" icon="md-checkmark-circle-outline" size="large" @click="handleClickOpenButton"
               v-else>
-        开放选课
+        Open Enrollment
       </Button>
     </ButtonGroup>
     <Table
@@ -22,7 +22,7 @@
     ></Table>
     <Modal
       v-model="showModal"
-      title="新增教师"
+      title="Add Term"
       @on-ok="handleAddTerm"
       :loading="modalLoading"
       :mask-closable="false"
@@ -35,7 +35,7 @@
         style="padding:20px 30px 20px 15px"
         ref="form"
       >
-        <FormItem label="学期名" prop="term">
+        <FormItem label="Term Name" prop="term">
           <Input v-model="form.term"></Input>
         </FormItem>
       </Form>
@@ -57,7 +57,7 @@
         }
         for (let i = 0; i < term.length; i++) {
           data1.push({
-            state: isCurrent[i] === 'yes' ? '当前学期' : '',
+            state: isCurrent[i] === 'yes' ? 'Current Term' : '',
             isCurrent: isCurrent[i],
             term: term[i]
           })
@@ -80,17 +80,17 @@
       const that = this
       return {
         modalLoading: true,
-        deps: ['计算机学院'],
+        deps: ['Computer Science'],
         columns: [{
-          'title': '学期名',
+          'title': 'Term',
           'key': 'term',
           'align': 'center'
         }, {
-          'title': '状态',
+          'title': 'Status',
           'key': 'state',
           'align': 'center'
         }, {
-          'title': '操作',
+          'title': 'Actions',
           'key': 'action',
           'fixed': 'right',
           'width': 270,
@@ -110,8 +110,8 @@
                 on: {
                   click: () => {
                     that.$Modal.confirm({
-                      title: '确认',
-                      content: params.row.isCurrent === 'yes' ? `确定要结束学期 ${params.row.term} 吗？` : `确定要设置学期 ${params.row.term} 为当前学期吗？`,
+                      title: 'Confirm',
+                      content: params.row.isCurrent === 'yes' ? `End term ${params.row.term}?` : `Set ${params.row.term} as the current term?`,
                       loading: true,
                       onOk: () => {
                         //结束学期
@@ -126,12 +126,12 @@
                         }).then((res) => {
                           that.$Modal.remove()
                           if (res.data.message === 'ok') {
-                            that.$Message.info('操作成功')
+                            that.$Message.info('Operation successful')
                             if (op === 'end') {
                               params.row.state = ''
                               params.row.isCurrent = 'no'
                             } else {
-                              params.row.state = '当前学期'
+                              params.row.state = 'Current Term'
                               params.row.isCurrent = 'yes'
                             }
                           } else {
@@ -144,7 +144,7 @@
                     })
                   }
                 }
-              }, params.row.isCurrent === 'yes' ? '结束当前学期' : '设为当前学期'),
+              }, params.row.isCurrent === 'yes' ? 'End Current Term' : 'Set Current'),
               h('Button', {
                 props: {
                   type: 'error',
@@ -154,8 +154,8 @@
                 on: {
                   click: () => {
                     that.$Modal.confirm({
-                      title: '确认',
-                      content: `确定要删除学期 ${params.row.term} 吗？`,
+                      title: 'Confirm',
+                      content: `Delete term ${params.row.term}?`,
                       loading: true,
                       onOk: () => {
                         that.$axios({
@@ -168,7 +168,7 @@
                         }).then((res) => {
                           that.$Modal.remove()
                           if (res.data.message === 'ok') {
-                            that.$Message.info('删除成功')
+                            that.$Message.info('Term deleted')
                             that.data1.splice(params.index, 1)
                           } else {
                             that.$Message.warning(res.data.message)
@@ -176,7 +176,7 @@
                         }).catch((err) => {
                           that.$Modal.remove()
                           that.$Notice.warning({
-                            title: '提示',
+                            title: 'Warning',
                             desc: err.toString()
                           })
                         })
@@ -186,7 +186,7 @@
                     })
                   }
                 }
-              }, '删除')
+              }, 'Delete')
             ])
           }
         }],
@@ -196,7 +196,7 @@
         },
         ruleValidate: {
           term: [
-            { required: true, message: '学期名不能为空', trigger: 'blur' }
+            { required: true, message: 'Term name is required', trigger: 'blur' }
           ]
         },
         showModal: false,
@@ -215,7 +215,7 @@
           }).then((res) => {
             if (res.data.message === 'ok') {
               this.openCourse = false
-              this.$Message.info('操作成功')
+              this.$Message.info('Enrollment closed')
             } else {
               this.$Message.warning(res.data.message)
             }
@@ -228,7 +228,7 @@
           }).then((res) => {
             if (res.data.message === 'ok') {
               this.openCourse = true
-              this.$Message.info('操作成功')
+              this.$Message.info('Enrollment opened')
             } else {
               this.$Message.warning(res.data.message)
             }
@@ -270,7 +270,7 @@
         }).then((res) => {
           console.log('handleAddTerm', res.data)
           if (res.data.message === 'ok') {
-            this.$Message.info('新增成功')
+            this.$Message.info('Term added')
             this.showModal = false
             this.data1.push(Object.assign({ state: '', isCurrent: 'no' }, this.form))
             this.$refs.form.resetFields()

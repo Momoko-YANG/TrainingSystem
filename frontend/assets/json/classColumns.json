@@ -1,48 +1,48 @@
 [
   {
-    "title": "课号",
+    "title": "Course ID",
     "key": "kh",
     "align": "center",
     "width": 100,
     "sortable": true
   },
   {
-    "title": "课名",
+    "title": "Course Name",
     "key": "km",
     "align": "center",
     "minWidth": 100,
     "sortable": true
   },
   {
-    "title": "学分",
+    "title": "Credits",
     "key": "xf",
     "align": "center",
     "sortable": true,
     "minWidth": 100
   },
   {
-    "title": "学时",
+    "title": "Hours",
     "key": "xs",
     "align": "center",
     "minWidth": 100,
     "sortable": true
   },
   {
-    "title": "院系号",
+    "title": "Department ID",
     "key": "yxh",
     "align": "center",
     "sortable": true,
     "minWidth": 150
   },
   {
-    "title": "上课时间",
+    "title": "Class Time",
     "key": "sksj",
     "align": "center",
     "sortable": true,
     "minWidth": 150
   },
   {
-    "title": "操作",
+    "title": "Actions",
     "key": "Action",
     "fixed": "right",
     "width": 200,

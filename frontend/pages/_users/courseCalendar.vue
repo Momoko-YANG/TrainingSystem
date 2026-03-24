@@ -1,11 +1,11 @@
 <template>
   <div class="wrapper">
     <Form class="operation">
-      <FormItem label="学期">
+      <FormItem label="Term">
         <Select
           v-model="selected"
           style="width:200px"
-          placeholder="请选择学期"
+          placeholder="Select a term"
           @on-change="handleSelectChange"
         >
           <Option v-for="term of terms" :value="term" :key="term">{{term}}</Option>
@@ -41,19 +41,9 @@
 
 <script>
   import calendarColumns from 'assets/js/calendarColumnsMock'
+  import { dayToColumnMap, parseScheduleUnit } from '~/assets/js/schedule'
 
   let that
-  const tiptopMap = {
-    '一': 1,
-    '二': 2,
-    '三': 3,
-    '四': 4,
-    '五': 5,
-    '六': 6,
-    '七': 7,
-    '天': 7,
-    '日': 7
-  }
   const colorArray = ['#d50000', '#E91E63', '#9C27B0', '#673AB7', '#3F51B5', '#03A9F4', '#00BCD4', '#009688', '#4CAF50', '#FF5722', '#795548', '#607D8B']
   export default {
     name: 'courseCalender',
@@ -114,32 +104,32 @@
       return {
         columns: [
           {
-            'title': '课程号',
+            'title': 'Course ID',
             'key': 'kh',
             'align': 'center'
           },
           {
-            'title': '课程名',
+            'title': 'Course Name',
             'key': 'km',
             'align': 'center'
           },
           {
-            'title': '教师号',
+            'title': 'Teacher ID',
             'key': 'gh',
             'align': 'center'
           },
           {
-            'title': '教师名',
+            'title': 'Teacher Name',
             'key': 'xm',
             'align': 'center'
           },
           {
-            'title': '学分',
+            'title': 'Credits',
             'key': 'xf',
             'align': 'center'
           },
           {
-            'title': '上课时间',
+            'title': 'Class Time',
             'key': 'sksj',
             'width': 150,
             'align': 'center'
@@ -219,13 +209,10 @@
             ct = [x.sksj]
           }
           for (let j = 0; j < ct.length; j++) {
-            if (ct[j].indexOf('星期') === 0) {
-              ct[j] = ct[j].substring(2)
-            }
-            const day = tiptopMap[ct[j][0]]
-            const arr = ct[j].substring(1).split('-')
-            let begin = parseInt(arr[0]),
-              end = parseInt(arr[1])
+            const parsed = parseScheduleUnit(ct[j])
+            const day = dayToColumnMap[parsed.day]
+            const begin = parsed.start
+            const end = parsed.end
             //给课程初始化一个颜色
             let color
             if ((kh === undefined || sksj === undefined) || (obj.kh === kh && obj.sksj === sksj)) {//没有hover的元素，或hover的就是这个课程
@@ -298,7 +285,7 @@
       this.calendarHeight = document.body.clientHeight - 66
       if (this.isStudent) {
         this.columns.push({
-          'title': '操作',
+          'title': 'Actions',
           'key': 'action',
           'fixed': 'right',
           'width': 100,
@@ -317,8 +304,8 @@
                 on: {
                   click: () => {
                     that.$Modal.confirm({
-                      title: '确认',
-                      content: `确定要退课《${params.row.km}》吗？`,
+                      title: 'Confirm',
+                      content: `Do you want to drop ${params.row.km}?`,
                       loading: true,
                       onOk: () => {
                         that.$axios({
@@ -332,19 +319,19 @@
                         }).then((res) => {
                           that.$Modal.remove()
                           if (res.data.message === 'ok') {
-                            that.$Message.info('退课成功')
+                            that.$Message.info('Course dropped')
                             that.data1.splice(params.index, 1)
                             that.renderCalendar()
                           } else {
                             that.$Notice.warning({
-                              title: '提示',
+                              title: 'Warning',
                               desc: res.data.message
                             })
                           }
                         }).catch((err) => {
                           that.$Modal.remove()
                           that.$Notice.warning({
-                            title: '提示',
+                            title: 'Warning',
                             desc: err.toString()
                           })
                         })
@@ -354,7 +341,7 @@
                     })
                   }
                 }
-              }, '退课')
+              }, 'Drop')
             ])
           }
         })

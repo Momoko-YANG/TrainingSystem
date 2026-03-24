@@ -1,141 +1,141 @@
 {
   "student": [
     {
-      "groupName": "個人情報",
+      "groupName": "Personal",
       "items": [
         {
           "name": "profile",
           "icon": "icon-solution",
-          "title": "個人情報"
+          "title": "Profile"
         }
       ]
     },
     {
-      "groupName": "履修管理",
+      "groupName": "Enrollment",
       "items": [
         {
           "name": "courseCalendar",
           "icon": "icon-calendar",
-          "title": "時間割照会"
+          "title": "Schedule"
         },
         {
           "name": "courseQuery",
           "icon": "icon-monitor",
-          "title": "コース検索"
+          "title": "Course Search"
         }
       ]
     },
     {
-      "groupName": "成績管理",
+      "groupName": "Grades",
       "items": [
         {
           "name": "scoreTable",
           "icon": "icon-project",
-          "title": "学期成績"
+          "title": "Term Scores"
         },
         {
           "name": "scoreSummary",
           "icon": "icon-filedone",
-          "title": "成績表"
+          "title": "Transcript"
         },
         {
           "name": "scoreTrend",
           "icon": "icon-linechart",
-          "title": "成績推移"
+          "title": "Score Trend"
         },
         {
           "name": "scoreCollege",
           "icon": "icon-pointmap",
-          "title": "成績順位"
+          "title": "Ranking"
         }
       ]
     }
   ],
   "teacher": [
     {
-      "groupName": "個人情報",
+      "groupName": "Personal",
       "items": [
         {
           "name": "profile",
           "icon": "icon-solution",
-          "title": "個人情報"
+          "title": "Profile"
         }
       ]
     },
     {
-      "groupName": "成績管理",
+      "groupName": "Grades",
       "items": [
         {
           "name": "scoreManagement",
           "icon": "icon-project",
-          "title": "成績管理"
+          "title": "Score Entry"
         },
         {
           "name": "scoreAnalysis",
           "icon": "icon-pointmap",
-          "title": "成績統計"
+          "title": "Score Analytics"
         }
       ]
     },
     {
-      "groupName": "コース管理",
+      "groupName": "Courses",
       "items": [
         {
           "name": "courseCalendar",
           "icon": "icon-calendar",
-          "title": "時間割照会"
+          "title": "Schedule"
         },
         {
           "name": "classTable",
           "icon": "icon-team",
-          "title": "クラス情報"
+          "title": "Class Roster"
         }
       ]
     }
   ],
   "admin": [
     {
-      "groupName": "個人情報",
+      "groupName": "Personal",
       "items": [
         {
           "name": "profile",
           "icon": "icon-solution",
-          "title": "個人情報"
+          "title": "Profile"
         }
       ]
     },
     {
-      "groupName": "教員・学生管理",
+      "groupName": "People",
       "items": [
         {
           "name": "teacherManagement",
           "icon": "icon-teacher",
-          "title": "教員管理"
+          "title": "Teacher Management"
         },
         {
           "name": "studentManagement",
           "icon": "icon-team",
-          "title": "学生管理"
+          "title": "Student Management"
         }
       ]
     },
     {
-      "groupName": "コース情報管理",
+      "groupName": "Courses",
       "items": [
         {
           "name": "courseManagement",
           "icon": "icon-filedone",
-          "title": "コース管理"
+          "title": "Course Management"
         }
       ]
     },
     {
-      "groupName": "システム管理",
+      "groupName": "System",
       "items": [
         {
           "name": "termManagement",
           "icon": "icon-Batchfolding",
-          "title": "学期管理"
+          "title": "Term Management"
         }
       ]
     }
